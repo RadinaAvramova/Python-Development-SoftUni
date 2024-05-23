@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+    <!-- Dashboard page -->
+    {% if fruits %}
+        <h2>Fruits</h2>
+    {% endif %}
+
+    <section id="dashboard">
+
+        <!-- Display a div "fruit" with information about each post (if any)-->
+        {% for fruit in fruits %}
+            <!-- first fruit -->
+            <div class="fruit">
+                <!-- fruit image -->
+                <img src="{{ fruit.fruit_image_url }}" alt="{{ fruit.name }} img"/>
+                <!-- fruit name -->
+                <h3 class="title">{{ fruit.fruit_name }}</h3>
+                <!-- fruit description -->
+                <p class="description">{{ fruit.description|truncatechars:50 }}</p>
+                <!-- fruit details button -->
+                <a class="details-btn" href="{% url 'details-fruit' fruit_id=fruit.id %}">More Info</a>
+            </div>
+            {% empty %}
+            <!-- Display a heading if there are no posts -->
+            <h2>No fruit info yet.</h2>
+        {% endfor %}
+    </section>
+
+
+{% endblock %}
